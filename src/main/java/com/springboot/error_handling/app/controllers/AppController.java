@@ -17,5 +17,12 @@ public class AppController {
     System.out.println(i);
     return "index";
   }
+  
+  @GetMapping({"/number"})
+  public String number() {
+    Integer i = Integer.parseInt("10xaq");
+    System.out.println(i);
+    return "index";
+  }
 
 }
