@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.springboot.error_handling.app.exceptions.UserNotFoundException;
+
 @ControllerAdvice
 public class ErrorHandlerController {
   
@@ -19,7 +21,7 @@ public class ErrorHandlerController {
     return "error/custom/arithmetic_exception";
   }
   
-
+  
   @ExceptionHandler(NumberFormatException.class)
   public String numberFormatError(NumberFormatException nfEx, Model model) {
     model.addAttribute("error", "Number Format Exception");
@@ -27,6 +29,14 @@ public class ErrorHandlerController {
     model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
     model.addAttribute("timestamp", new Date());
     return "error/custom/number_format_exception";
+  }
+  
+
+  @ExceptionHandler(UserNotFoundException.class)
+  public String userNotFound(UserNotFoundException uNfEx, Model model) {
+    model.addAttribute("title", "User Not in System");
+    model.addAttribute("ex", uNfEx);
+    return "error/custom/user_not_found";
   }
   
 }

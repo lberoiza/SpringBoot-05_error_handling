@@ -4,13 +4,17 @@ import java.util.List;
 import java.util.ArrayList;
 
 import java.util.Optional;
+
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.springboot.error_handling.app.exceptions.UserNotFoundException;
 import com.springboot.error_handling.app.interfaces.services.IDataServices;
 import com.springboot.error_handling.app.models.User;
 
-@Service
-public class UserService implements IDataServices<User> {
+@Primary
+@Service("UserService")
+public class UserService implements IDataServices<User, UserNotFoundException> {
 
   private List<User> list;
 
@@ -30,8 +34,11 @@ public class UserService implements IDataServices<User> {
   }
 
   @Override
-  public User getById(Integer id) {
+  public User getById(Integer id) throws UserNotFoundException {
     Optional<User> result = list.stream().filter(user -> user.getId() == id).findFirst();
+    
+    if(result.isEmpty()) throw UserNotFoundException.fromId(id);
+    
     return result.orElse(null);
   }
 

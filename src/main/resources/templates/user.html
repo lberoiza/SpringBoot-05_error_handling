@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}"></title>
+</head>
+<body>
+  <h3 th:text="${title}"></h3>
+  <section class="user-details">
+    <div class="user-detail-group">
+      <span>User ID: </span><span class="user-info" th:text="${user.id}"></span>
+    </div>
+    <div class="user-detail-group">
+      <span>Name: </span><span class="user-info" th:text="${user.name}"></span>
+    </div>
+    <div class="user-detail-group">
+      <span>Surname: </span><span class="user-info" th:text="${user.surname}"></span>
+    </div>
+  </section>
+
+</body>
+</html>
