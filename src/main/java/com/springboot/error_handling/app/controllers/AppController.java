@@ -10,5 +10,12 @@ public class AppController {
   public String index() {
     return "index";
   }
+  
+  @GetMapping({"/divide"})
+  public String divide() {
+    Integer i = 5/0;
+    System.out.println(i);
+    return "index";
+  }
 
 }
