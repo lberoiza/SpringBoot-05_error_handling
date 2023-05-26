@@ -36,10 +36,7 @@ public class UserService implements IDataServices<User, UserNotFoundException> {
   @Override
   public User getById(Integer id) throws UserNotFoundException {
     Optional<User> result = list.stream().filter(user -> user.getId().equals(id)).findFirst();
-    
-    if(result.isEmpty()) throw UserNotFoundException.fromId(id);
-    
-    return result.orElse(null);
+    return result.orElseThrow(() -> UserNotFoundException.fromId(id));
   }
 
 }
